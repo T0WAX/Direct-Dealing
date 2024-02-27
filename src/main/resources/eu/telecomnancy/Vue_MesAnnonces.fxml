@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.Vue_Mes_Annonces_Controller">
+   <children>
+      <Button fx:id="creationButton" onAction="#creerButtonClicked" mnemonicParsing="false" text="Créer une annonce">
+         <VBox.margin>
+            <Insets bottom="20.0" top="20.0" />
+         </VBox.margin>
+      </Button>
+      <Label fx:id="titreLabel" text="Voici la liste de vos annonces" textAlignment="CENTER">
+         <font>
+            <Font name="Ubuntu" size="30.0" />
+         </font>
+      </Label>
+      <ListView fx:id="annonceView" prefHeight="500.0" prefWidth="200.0">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </ListView>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>

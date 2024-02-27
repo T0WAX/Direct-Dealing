@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="menuBar" alignment="CENTER" spacing="40.0" stylesheets="@Menu.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.Vue_Menu_Controller">
+   <children>
+      <VBox alignment="CENTER" prefHeight="48.0" prefWidth="109.0">
+         <children>
+            <ImageView fitHeight="26.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/logoTNDD.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="labelNomPrenom" alignment="CENTER" contentDisplay="CENTER" prefHeight="5.0" prefWidth="206.0" text="Nom Prénom">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelNombreFlorains" alignment="CENTER" prefHeight="15.0" prefWidth="194.0" text="Nb florains">
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Button mnemonicParsing="false" onAction="#aller_MesAnnonces" prefHeight="67.0" text="Mes annonces" textAlignment="CENTER" wrapText="true">
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding></Button>
+      <Button mnemonicParsing="false" onAction="#aller_mesdeals" text="Mes deals" textAlignment="CENTER" wrapText="true">
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding></Button>
+      <Button mnemonicParsing="false" onAction="#aller_rechercher" text="Rechercher" textAlignment="CENTER" wrapText="true">
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding></Button>
+      <Button mnemonicParsing="false" onAction="#aller_messagerie" text="Messagerie" textAlignment="CENTER" wrapText="true">
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding></Button>
+      <Button mnemonicParsing="false" onAction="#aller_profil" text="Mon profil" textAlignment="CENTER" wrapText="true">
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding></Button>
+      <Button mnemonicParsing="false" onAction="#aller_accueil" text="Se déconnecter" textAlignment="CENTER" wrapText="true">
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding></Button>
+   </children>
+   <opaqueInsets>
+      <Insets bottom="10.0" left="10.0" right="10.0" />
+   </opaqueInsets>
+   <padding>
+      <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+   </padding>
+</HBox>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.Vue_AnnonceAnnonceur_Panneau_Controller">
+   <children>
+      <VBox alignment="CENTER" prefHeight="0.0" prefWidth="600.0">
+         <children>
+            <Label fx:id="titreLabel" text="Titre de l'annonce" />
+            <TextField fx:id="titreTextField" prefHeight="26.0" prefWidth="525.0" />
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" prefHeight="22.0" prefWidth="600.0">
+         <children>
+            <Label fx:id="coutLabel" text="Cout proposé en Florain" />
+            <TextField fx:id="coutTextField" prefHeight="26.0" prefWidth="591.0" />
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" prefHeight="22.0" prefWidth="600.0">
+         <children>
+            <Label fx:id="uniteCoutLabel" text="Unité du cout (par exemple /m² ou alors /h...)" />
+            <TextField fx:id="uniteCoutTextField" prefHeight="26.0" prefWidth="591.0" />
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" prefHeight="21.0" prefWidth="600.0">
+         <children>
+            <Label fx:id="descriptionLabel" text="Description" />
+            <TextField fx:id="descriptionTextField" prefWidth="310.0" />
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" prefHeight="21.0" prefWidth="600.0">
+         <children>
+            <Label fx:id="localLabel" text="Localisation" />
+            <TextField fx:id="localTextField" prefHeight="24.0" prefWidth="504.0" />
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" prefHeight="21.0" prefWidth="600.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="debutLabel" text="Date de début" />
+                        <DatePicker fx:id="debutPicker" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="finLabel" text="Date de fin" />
+                        <DatePicker fx:id="finPicker" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="40.0" prefWidth="185.0">
+                     <children>
+                        <Label fx:id="ghostLabel" text="centrage" visible="false" />
+                        <Button fx:id="ajoutDispoButton" mnemonicParsing="false" onAction="#ajoutDispoButtonClicked" text="Ajouter disponibilité" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="116.0" prefWidth="257.0">
+                     <children>
+                        <Label fx:id="dateLabel" text="Disponibilité" />
+                        <ListView fx:id="dateListView" minHeight="100.0" prefHeight="100.0" prefWidth="284.0" />
+                     </children>
+                  </VBox>
+                  <Button fx:id="supprDispoButton" mnemonicParsing="false" onAction="#supprDispoButtonClicked" text="Supprimer disponibilité" />
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+         <children>
+            <Label fx:id="typeLabel" text="Catégorie de l'annonce :" />
+            <ChoiceBox fx:id="choiceAnnonce" prefWidth="150.0" />
+         </children>
+      </HBox>
+      <Button fx:id="imageButton" mnemonicParsing="false" onAction="#ImageChooser" text="Selectionner une photo" />
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+         <children>
+            <Button fx:id="posterButton" mnemonicParsing="false" onAction="#posterButtonClicked" text="Poster Annonce" />
+            <Button fx:id="masquerButton" mnemonicParsing="false" onAction="#masquerButtonClicked" text="Masquer Annonce" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>

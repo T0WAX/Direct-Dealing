@@ -1,0 +1,74 @@
+/* CSS générique */
+* {
+    -fx-my-background-color: #FFFFFF;
+    -fx-my-font-color: #2d302d;    
+    -fx-my-font-family: 'Arial', sans-serif;         
+    -fx-my-menu-color: #f2f2f2;                              
+    -fx-my-button-color: #ef7540ff;  
+    -fx-my-listview-font-color: #2d302d;             
+    -fx-my-listview-color-highlighted: rgb(230, 230, 230);     
+}
+
+
+.root {
+    -fx-background-color: -fx-my-background-color;
+}
+
+.label {
+    -fx-text-fill: -fx-my-font-color;
+    -fx-font-family: -fx-my-font-family;
+}
+
+.button {
+    -fx-base: -fx-my-button-color;
+    -fx-text-fill: #FFFFFF;
+    -fx-transition: all 0.3s ease;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 8, 0, 4, 4);
+}
+
+
+.text-field, .password-field {
+    -fx-transition: all 0.3s ease;
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #88aaff;
+}
+/* LIST VIEW */
+/*** The list view itself ***/    
+.list-view {
+    -fx-font-size: 15px;
+}
+
+/*** List cell itself ***/
+.list-view .list-cell {
+
+}
+
+/*** List cell's label (not selected / hovered) ***/
+.list-view .list-cell .label {
+    -fx-text-fill: -fx-my-listview-font-color;
+}
+
+/*** List cell's label (disabled) ***/
+.list-view .list-cell .label:disabled {
+    -fx-opacity: 1.0;
+}
+
+/*** List cell itself (selected / hovered) ***/
+.list-view .list-cell:hover,
+.list-view .list-cell:selected {
+    -fx-background-color: -fx-my-listview-color-highlighted;
+}
+
+
+/* ____________________________________________________________________________ */
+
+#menuBar {
+    -fx-background-color: -fx-my-menu-color;
+    -fx-pref-height: 80px;
+}

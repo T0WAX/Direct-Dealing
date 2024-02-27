@@ -1,0 +1,11 @@
+/* CSS spécifique au Menu */
+.button {
+    -fx-font-family: 'Arial', sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-pref-height: 60px;
+    -fx-pref-width: 200px;
+}
+/*____________________________________________________________________________*/
+
+

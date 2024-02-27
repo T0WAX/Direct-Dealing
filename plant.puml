@@ -1,0 +1,493 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class Annonce {
+  + Annonce(Utilisateur, String, String, String, int, String, String, List<List<Date>>, Image): 
+  - typeAnnonce: String
+  - proprietaire: Utilisateur
+  - titre: String
+  - disponibilites: List<List<Date>>
+  - localisation: String
+  - photo: Image
+  - visible: Boolean
+  - uniteCout: String
+  - description: String
+  - cout: int
+  + estCreneauDisponible(Date, Date): boolean
+  + addNote(double): void
+  + ajouterCreneauDispo(Date, Date): void
+  + libererCreneau(Date, Date): boolean
+  + retirerCreneauDispo(Date, Date): boolean
+  + afficherCreneauxDispo(): void
+  + reserverCreneau(Date, Date): boolean
+   description: String
+   proprietaire: Utilisateur
+   disponibilites: List<List<Date>>
+   cout: int
+   titre: String
+   visible: Boolean
+   typeAnnonce: String
+   notation: double
+   uniteCout: String
+   localisation: String
+   photo: Image
+}
+class Conversation {
+  + Conversation(Annonce, int, Date, Date, Utilisateur, DirectDealing, String): 
+  + Conversation(Annonce, String, int, Date, Date, Utilisateur): 
+  - montantDeLOffre: int
+  - messages: List<Message>
+  + addMessage(Utilisateur, String): void
+  + getInterlocutorOf(Utilisateur): Utilisateur
+  + isDecisionTakenByAnnoncer(): Boolean
+   annonce: Annonce
+   demmandeur: Utilisateur
+   dateFin: Date
+   isDecisionTakenByAnnoncerValue: Boolean
+   montantDeLOffre: int
+   messages: List<Message>
+   dateDebut: Date
+}
+class Deal {
+  + Deal(Conversation): 
+  - titre: String
+  - fin: Date
+  - photo: Image
+  - uniteCout: String
+  - note: int
+  - cout: int
+  - rendu: Boolean
+  - debut: Date
+  + rendreEtEnvoyer(int): void
+   annonce: Annonce
+   rendu: Boolean
+   fin: Date
+   cout: int
+   titre: String
+   note: int
+   uniteCout: String
+   debut: Date
+   photo: Image
+}
+class DirectDealing {
+  + DirectDealing(): 
+  - dealAffichee: Deal
+  - moteurDeRecherche: MoteurDeRecherche
+  - annonceAffichee: Annonce
+  - conversationAffichee: Conversation
+  - utilisateurCourant: Utilisateur
+  - mapUtilisateurs: HashMap<String, Utilisateur>
+  + ajouterObservateur(Observateur): void
+  + refuserOffre(): void
+  + login(String, String): Boolean
+  + sendMessage(String): void
+  + accepterOffre(Conversation): void
+  + notifierObservateurs(): void
+  + notifierObservateursMoteur(): void
+  + accepterOffre(): void
+  + supprimerObservateur(Observateur): void
+  + signin(String, String, String, String, String, String): Boolean
+   moteurDeRecherche: MoteurDeRecherche
+   annonceAffichee: Annonce
+   mapUtilisateurs: HashMap<String, Utilisateur>
+   utilisateurCourant: Utilisateur
+   dealAffichee: Deal
+   admin: Utilisateur
+   conversationAffichee: Conversation
+}
+class Main {
+  + Main(): 
+  - instance: Main
+  + main(String[]): void
+  - Page_Retour(BorderPane, DirectDealing): void
+  - Page_Message_Annonceur(BorderPane, DirectDealing): void
+  - Page_MesAnnonces(BorderPane, DirectDealing): void
+  - Page_Rechercher(BorderPane, DirectDealing): void
+  - Page_ModifierAnnonce(BorderPane, DirectDealing): void
+  + changeScene(String): void
+  + start(Stage): void
+  - Page_Accueil(BorderPane, DirectDealing): void
+  - Page_Profil(BorderPane, DirectDealing): void
+  - Page_Litige_Deals(BorderPane, DirectDealing): void
+  - Page_Creation_Annonce(BorderPane, DirectDealing): void
+  - Page_MesDeals(BorderPane, DirectDealing): void
+  - Page_Message_Demandeur(BorderPane, DirectDealing): void
+  - Page_Messagerie(BorderPane, DirectDealing): void
+  - Page_VoirAnnonce(BorderPane, DirectDealing): void
+  - Page_Inscription(BorderPane, DirectDealing): void
+   instance: Main
+}
+class Message {
+  + Message(Utilisateur, String): 
+  - emmeteur: Utilisateur
+  - message: String
+   message: String
+   emmeteur: Utilisateur
+}
+class MoteurDeRecherche {
+  + MoteurDeRecherche(): 
+  - annonces: List<Annonce>
+  - annoncesFiltrees: List<Annonce>
+  + rechercher(Boolean, Boolean, LocalDate, LocalDate, String, String): void
+  + supprimerAnnonce(Annonce): void
+  + ajouterAnnonce(Annonce): void
+   annonces: List<Annonce>
+   annoncesFiltrees: List<Annonce>
+}
+interface Observateur << interface >> {
+  + reagir(): void
+}
+class Tests {
+  - Tests(): 
+  - instance: Tests
+  ~ testReserverCreneau(): void
+  + main(String[]): void
+  ~ testOutput(boolean): void
+  ~ testAjouterCreneauDispo(): void
+  ~ testRetirerCreneauDispo(): void
+  ~ testLibererCreneau(): void
+   instance: Tests
+}
+class Utilisateur {
+  + Utilisateur(int, String, String, String, String, String): 
+  - florainLibre: int
+  - nom: String
+  - motDePasse: String
+  - prenom: String
+  - conversations: List<Conversation>
+  - florainReservee: int
+  - idUser: int
+  - description: String
+  - deals: List<Deal>
+  - modeSommeil: Boolean
+  - identifiant: String
+  - annonces: List<Annonce>
+  + addDeal(Deal): void
+  + reserverFlorain(int): void
+  + addFlorainReservee(int): void
+  + accepterOffre(Conversation): void
+  + makeAnOffer(Annonce, String, int, Date, Date): void
+  + modifierAnnonce(Annonce, String, String, String, int, String, String, List<List<Date>>, Image): void
+  + removeFlorainReservee(int): void
+  + removeFlorainLibre(int): void
+  + addConversation(Conversation): void
+  + refuserOffre(Conversation): void
+  + addFlorainLibre(int): void
+  + posterAnnonce(String, String, String, int, String, String, List<List<Date>>, Image): void
+   description: String
+   florainReservee: int
+   nom: String
+   modeSommeil: Boolean
+   annonces: List<Annonce>
+   identifiant: String
+   florainLibre: int
+   conversations: List<Conversation>
+   deals: List<Deal>
+   idUser: int
+   prenom: String
+   idendtifiant: String
+   florain: int
+   motDePasse: String
+}
+class Vue_AnnonceAnnonceur_Controller {
+  + Vue_AnnonceAnnonceur_Controller(DirectDealing): 
+  + reagir(): void
+}
+class Vue_AnnonceAnnonceur_Panneau_Controller {
+  + Vue_AnnonceAnnonceur_Panneau_Controller(DirectDealing, Vue_AnnonceInfos_Controller): 
+  + ajoutDispoButtonClicked(ActionEvent): void
+  + initialize(): void
+  + masquerButtonClicked(ActionEvent): void
+  + reagir(): void
+  + ImageChooser(ActionEvent): void
+  + posterButtonClicked(ActionEvent): void
+  + supprDispoButtonClicked(ActionEvent): void
+}
+class Vue_AnnonceDemandeur_Controller {
+  + Vue_AnnonceDemandeur_Controller(DirectDealing): 
+  + reagir(): void
+}
+class Vue_AnnonceDemandeur_Panneau_Controller {
+  + Vue_AnnonceDemandeur_Panneau_Controller(DirectDealing): 
+  + envoyerButtonClicked(ActionEvent): void
+  + reagir(): void
+}
+class Vue_AnnonceInfos_Controller {
+  + Vue_AnnonceInfos_Controller(DirectDealing, Annonce): 
+  - image: ImageView
+  + initialize(): void
+  + reagir(): void
+   image: Image
+}
+class Vue_Annonce_Controller {
+  + Vue_Annonce_Controller(DirectDealing): 
+  + reagir(): void
+}
+class Vue_Demarrage_Controller {
+  + Vue_Demarrage_Controller(DirectDealing): 
+  + connexion(ActionEvent): void
+  + inscription(MouseEvent): void
+  + reagir(): void
+}
+class Vue_Inscription_Controller {
+  + Vue_Inscription_Controller(DirectDealing): 
+  + inscriptionButtonClicked(ActionEvent): void
+  + connexionButtonClicked(ActionEvent): void
+  + reagir(): void
+}
+class Vue_Litige_Deals_Controller {
+  + Vue_Litige_Deals_Controller(DirectDealing): 
+  + envoyer(ActionEvent): void
+  + reagir(): void
+}
+class Vue_Menu_Controller {
+  + Vue_Menu_Controller(DirectDealing): 
+  + aller_accueil(Event): void
+  + aller_messagerie(Event): void
+  + reagir(): void
+  + aller_profil(Event): void
+  + aller_rechercher(Event): void
+  + aller_mesdeals(Event): void
+  + initialize(): void
+  + aller_MesAnnonces(Event): void
+}
+class Vue_MesDealsElementInListView_Controller {
+  + Vue_MesDealsElementInListView_Controller(DirectDealing, Deal): 
+  + reagir(): void
+  + rendre(ActionEvent): void
+  + creer_litige(ActionEvent): void
+  + initialize(): void
+}
+class Vue_MesDeals_Controller {
+  + Vue_MesDeals_Controller(DirectDealing): 
+  + initialize(): void
+  + reagir(): void
+}
+class Vue_Mes_AnnoncesElement_Controller {
+  + Vue_Mes_AnnoncesElement_Controller(DirectDealing, Annonce): 
+  + reagir(): void
+  + initialize(): void
+  + modifierButtonClicked(ActionEvent): void
+}
+class Vue_Mes_Annonces_Controller {
+  + Vue_Mes_Annonces_Controller(DirectDealing): 
+  + reagir(): void
+  + creerButtonClicked(): void
+  + initialize(): void
+}
+class Vue_MessageAnnonceurControle_Controller {
+  + Vue_MessageAnnonceurControle_Controller(DirectDealing): 
+  + accepter(ActionEvent): void
+  + refuser(ActionEvent): void
+  + envoyer(ActionEvent): void
+  + reagir(): void
+  + initialize(): void
+}
+class Vue_MessageAnnonceurTitre_Controller {
+  + Vue_MessageAnnonceurTitre_Controller(DirectDealing): 
+  + reagir(): void
+  + initialize(): void
+}
+class Vue_MessageAnnonceur_Controller {
+  + Vue_MessageAnnonceur_Controller(DirectDealing): 
+  + reagir(): void
+}
+class Vue_MessageDemandeurControle_Controller {
+  + Vue_MessageDemandeurControle_Controller(DirectDealing): 
+  + envoyer(ActionEvent): void
+  + reagir(): void
+}
+class Vue_MessageDemandeurTitre_Controller {
+  + Vue_MessageDemandeurTitre_Controller(DirectDealing): 
+  + initialize(): void
+  + reagir(): void
+}
+class Vue_MessageGlobal_Controller {
+  + Vue_MessageGlobal_Controller(DirectDealing): 
+  + initialize(): void
+  + reagir(): void
+}
+class Vue_MessageInfos_Controller {
+  + Vue_MessageInfos_Controller(DirectDealing): 
+  + initialize(): void
+  + reagir(): void
+}
+class Vue_MessagerieElementInListView_Controller {
+  + Vue_MessagerieElementInListView_Controller(DirectDealing, Conversation): 
+  + initialize(): void
+  + ouvrir_message(Event): void
+  + reagir(): void
+}
+class Vue_Messagerie_Controller {
+  + Vue_Messagerie_Controller(DirectDealing): 
+  + initialize(): void
+  + reagir(): void
+}
+class Vue_Profil_Controller {
+  + Vue_Profil_Controller(DirectDealing): 
+  + initialize(): void
+  + reagir(): void
+}
+class Vue_Rechercher_Annonces_Controller {
+  + Vue_Rechercher_Annonces_Controller(DirectDealing): 
+  + initialize(): void
+  + reagir(): void
+}
+class Vue_Rechercher_Annonces_Element_Controller {
+  + Vue_Rechercher_Annonces_Element_Controller(DirectDealing, Annonce): 
+  + reagir(): void
+  + initialize(): void
+  + voirButtonClicked(ActionEvent): void
+}
+class Vue_Rechercher_Controller {
+  + Vue_Rechercher_Controller(DirectDealing): 
+  + reagir(): void
+}
+class Vue_Rechercher_Moteur_Controller {
+  + Vue_Rechercher_Moteur_Controller(DirectDealing): 
+  + rechercherButtonClicked(ActionEvent): void
+  + reagir(): void
+  + initialize(): void
+}
+class Vue_Retour_Controller {
+  + Vue_Retour_Controller(DirectDealing): 
+  + deuxpoints(ActionEvent): void
+  + reagir(): void
+  + cinqpoints(ActionEvent): void
+  + quatrepoints(ActionEvent): void
+  + envoyer(ActionEvent): void
+  + troispoints(ActionEvent): void
+  + unpoint(ActionEvent): void
+}
+
+Annonce                                    "1" *-[#595959,plain]-> "proprietaire\n1" Utilisateur                                
+Conversation                               "1" *-[#595959,plain]-> "annonceAssociee\n1" Annonce                                    
+Conversation                               "1" *-[#595959,plain]-> "deal\n1" Deal                                       
+Conversation                               "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Conversation                               "1" *-[#595959,plain]-> "messages\n*" Message                                    
+Conversation                                -[#595959,dashed]->  Message                                    : "«create»"
+Conversation                               "1" *-[#595959,plain]-> "demandeur\n1" Utilisateur                                
+Deal                                       "1" *-[#595959,plain]-> "annonceAssociee\n1" Annonce                                    
+Deal                                       "1" *-[#595959,plain]-> "demandeur\n1" Utilisateur                                
+DirectDealing                              "1" *-[#595959,plain]-> "annonceAffichee\n1" Annonce                                    
+DirectDealing                              "1" *-[#595959,plain]-> "conversationAffichee\n1" Conversation                               
+DirectDealing                              "1" *-[#595959,plain]-> "dealAffichee\n1" Deal                                       
+DirectDealing                               -[#595959,dashed]->  MoteurDeRecherche                          : "«create»"
+DirectDealing                              "1" *-[#595959,plain]-> "moteurDeRecherche\n1" MoteurDeRecherche                          
+DirectDealing                              "1" *-[#595959,plain]-> "obs\n*" Observateur                                
+DirectDealing                               -[#595959,dashed]->  Utilisateur                                : "«create»"
+DirectDealing                              "1" *-[#595959,plain]-> "mapUtilisateurs\n*" Utilisateur                                
+Main                                        -[#595959,dashed]->  DirectDealing                              : "«create»"
+Main                                       "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Main                                        -[#595959,dashed]->  Vue_AnnonceAnnonceur_Controller            : "«create»"
+Main                                        -[#595959,dashed]->  Vue_AnnonceAnnonceur_Panneau_Controller    : "«create»"
+Main                                        -[#595959,dashed]->  Vue_AnnonceDemandeur_Controller            : "«create»"
+Main                                        -[#595959,dashed]->  Vue_AnnonceDemandeur_Panneau_Controller    : "«create»"
+Main                                        -[#595959,dashed]->  Vue_AnnonceInfos_Controller                : "«create»"
+Main                                        -[#595959,dashed]->  Vue_Demarrage_Controller                   : "«create»"
+Main                                        -[#595959,dashed]->  Vue_Inscription_Controller                 : "«create»"
+Main                                        -[#595959,dashed]->  Vue_Litige_Deals_Controller                : "«create»"
+Main                                        -[#595959,dashed]->  Vue_Menu_Controller                        : "«create»"
+Main                                        -[#595959,dashed]->  Vue_MesDeals_Controller                    : "«create»"
+Main                                        -[#595959,dashed]->  Vue_Mes_Annonces_Controller                : "«create»"
+Main                                        -[#595959,dashed]->  Vue_MessageAnnonceurControle_Controller    : "«create»"
+Main                                        -[#595959,dashed]->  Vue_MessageAnnonceurTitre_Controller       : "«create»"
+Main                                        -[#595959,dashed]->  Vue_MessageDemandeurControle_Controller    : "«create»"
+Main                                        -[#595959,dashed]->  Vue_MessageDemandeurTitre_Controller       : "«create»"
+Main                                        -[#595959,dashed]->  Vue_MessageGlobal_Controller               : "«create»"
+Main                                        -[#595959,dashed]->  Vue_MessageInfos_Controller                : "«create»"
+Main                                        -[#595959,dashed]->  Vue_Messagerie_Controller                  : "«create»"
+Main                                        -[#595959,dashed]->  Vue_Profil_Controller                      : "«create»"
+Main                                        -[#595959,dashed]->  Vue_Rechercher_Annonces_Controller         : "«create»"
+Main                                        -[#595959,dashed]->  Vue_Rechercher_Controller                  : "«create»"
+Main                                        -[#595959,dashed]->  Vue_Rechercher_Moteur_Controller           : "«create»"
+Main                                        -[#595959,dashed]->  Vue_Retour_Controller                      : "«create»"
+Message                                    "1" *-[#595959,plain]-> "emmeteur\n1" Utilisateur                                
+MoteurDeRecherche                          "1" *-[#595959,plain]-> "annonces\n*" Annonce                                    
+Tests                                       -[#595959,dashed]->  Annonce                                    : "«create»"
+Tests                                      "1" *-[#595959,plain]-> "annonce\n1" Annonce                                    
+Tests                                      "1" *-[#595959,plain]-> "proprietaire\n1" Utilisateur                                
+Tests                                       -[#595959,dashed]->  Utilisateur                                : "«create»"
+Utilisateur                                 -[#595959,dashed]->  Annonce                                    : "«create»"
+Utilisateur                                "1" *-[#595959,plain]-> "annonces\n*" Annonce                                    
+Utilisateur                                "1" *-[#595959,plain]-> "conversations\n*" Conversation                               
+Utilisateur                                 -[#595959,dashed]->  Conversation                               : "«create»"
+Utilisateur                                "1" *-[#595959,plain]-> "deals\n*" Deal                                       
+Utilisateur                                 -[#595959,dashed]->  Deal                                       : "«create»"
+Vue_AnnonceAnnonceur_Controller            "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_AnnonceAnnonceur_Controller             -[#008200,dashed]-^  Observateur                                
+Vue_AnnonceAnnonceur_Panneau_Controller    "1" *-[#595959,plain]-> "annonce\n1" Annonce                                    
+Vue_AnnonceAnnonceur_Panneau_Controller    "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_AnnonceAnnonceur_Panneau_Controller     -[#008200,dashed]-^  Observateur                                
+Vue_AnnonceAnnonceur_Panneau_Controller    "1" *-[#595959,plain]-> "ai\n1" Vue_AnnonceInfos_Controller                
+Vue_AnnonceDemandeur_Controller            "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_AnnonceDemandeur_Controller             -[#008200,dashed]-^  Observateur                                
+Vue_AnnonceDemandeur_Panneau_Controller    "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_AnnonceDemandeur_Panneau_Controller     -[#008200,dashed]-^  Observateur                                
+Vue_AnnonceInfos_Controller                "1" *-[#595959,plain]-> "annonce\n1" Annonce                                    
+Vue_AnnonceInfos_Controller                "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_AnnonceInfos_Controller                 -[#008200,dashed]-^  Observateur                                
+Vue_Annonce_Controller                     "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_Annonce_Controller                      -[#008200,dashed]-^  Observateur                                
+Vue_Demarrage_Controller                   "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_Demarrage_Controller                    -[#008200,dashed]-^  Observateur                                
+Vue_Inscription_Controller                 "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_Inscription_Controller                  -[#008200,dashed]-^  Observateur                                
+Vue_Litige_Deals_Controller                 -[#595959,dashed]->  Annonce                                    : "«create»"
+Vue_Litige_Deals_Controller                 -[#595959,dashed]->  Conversation                               : "«create»"
+Vue_Litige_Deals_Controller                "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_Litige_Deals_Controller                 -[#008200,dashed]-^  Observateur                                
+Vue_Menu_Controller                        "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_Menu_Controller                         -[#008200,dashed]-^  Observateur                                
+Vue_MesDealsElementInListView_Controller   "1" *-[#595959,plain]-> "deal\n1" Deal                                       
+Vue_MesDealsElementInListView_Controller   "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_MesDealsElementInListView_Controller    -[#008200,dashed]-^  Observateur                                
+Vue_MesDeals_Controller                    "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_MesDeals_Controller                     -[#008200,dashed]-^  Observateur                                
+Vue_MesDeals_Controller                     -[#595959,dashed]->  Vue_MesDealsElementInListView_Controller   : "«create»"
+Vue_Mes_AnnoncesElement_Controller         "1" *-[#595959,plain]-> "annonce\n1" Annonce                                    
+Vue_Mes_AnnoncesElement_Controller         "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_Mes_AnnoncesElement_Controller          -[#008200,dashed]-^  Observateur                                
+Vue_Mes_Annonces_Controller                "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_Mes_Annonces_Controller                 -[#008200,dashed]-^  Observateur                                
+Vue_Mes_Annonces_Controller                 -[#595959,dashed]->  Vue_Mes_AnnoncesElement_Controller         : "«create»"
+Vue_MessageAnnonceurControle_Controller    "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_MessageAnnonceurControle_Controller     -[#008200,dashed]-^  Observateur                                
+Vue_MessageAnnonceurTitre_Controller       "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_MessageAnnonceurTitre_Controller        -[#008200,dashed]-^  Observateur                                
+Vue_MessageAnnonceur_Controller            "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_MessageAnnonceur_Controller             -[#008200,dashed]-^  Observateur                                
+Vue_MessageDemandeurControle_Controller    "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_MessageDemandeurControle_Controller     -[#008200,dashed]-^  Observateur                                
+Vue_MessageDemandeurTitre_Controller       "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_MessageDemandeurTitre_Controller        -[#008200,dashed]-^  Observateur                                
+Vue_MessageGlobal_Controller               "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_MessageGlobal_Controller                -[#008200,dashed]-^  Observateur                                
+Vue_MessageInfos_Controller                "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_MessageInfos_Controller                 -[#008200,dashed]-^  Observateur                                
+Vue_MessagerieElementInListView_Controller "1" *-[#595959,plain]-> "conversation\n1" Conversation                               
+Vue_MessagerieElementInListView_Controller "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_MessagerieElementInListView_Controller  -[#008200,dashed]-^  Observateur                                
+Vue_Messagerie_Controller                  "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_Messagerie_Controller                   -[#008200,dashed]-^  Observateur                                
+Vue_Messagerie_Controller                   -[#595959,dashed]->  Vue_MessagerieElementInListView_Controller : "«create»"
+Vue_Profil_Controller                      "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_Profil_Controller                       -[#008200,dashed]-^  Observateur                                
+Vue_Rechercher_Annonces_Controller         "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_Rechercher_Annonces_Controller         "1" *-[#595959,plain]-> "moteurDeRecherche\n1" MoteurDeRecherche                          
+Vue_Rechercher_Annonces_Controller          -[#008200,dashed]-^  Observateur                                
+Vue_Rechercher_Annonces_Controller          -[#595959,dashed]->  Vue_Rechercher_Annonces_Element_Controller : "«create»"
+Vue_Rechercher_Annonces_Element_Controller "1" *-[#595959,plain]-> "annonce\n1" Annonce                                    
+Vue_Rechercher_Annonces_Element_Controller "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_Rechercher_Annonces_Element_Controller  -[#008200,dashed]-^  Observateur                                
+Vue_Rechercher_Controller                  "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_Rechercher_Controller                   -[#008200,dashed]-^  Observateur                                
+Vue_Rechercher_Moteur_Controller           "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_Rechercher_Moteur_Controller           "1" *-[#595959,plain]-> "moteurDeRecherche\n1" MoteurDeRecherche                          
+Vue_Rechercher_Moteur_Controller            -[#008200,dashed]-^  Observateur                                
+Vue_Retour_Controller                      "1" *-[#595959,plain]-> "directDealing\n1" DirectDealing                              
+Vue_Retour_Controller                       -[#008200,dashed]-^  Observateur                                
+@enduml

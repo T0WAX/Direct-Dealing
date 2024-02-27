@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.telecomnancy.Vue_AnnonceInfos_Controller">
+   <children>
+      <VBox fx:id="voirVBox" alignment="CENTER_LEFT" prefHeight="400.0" prefWidth="246.0" spacing="20.0">
+         <children>
+            <ImageView fx:id="image" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="titreLabel" text="Titre de l'annonce" wrapText="true">
+               <font>
+                  <Font name="System Bold Italic" size="20.0" />
+               </font></Label>
+            <Label fx:id="coutLabel" text="Cout">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font></Label>
+            <Label  text="Description :">
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="descriptionLabel" text="Ma description" wrapText="true">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></Label>
+         </children>
+         <HBox.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </HBox.margin>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+      <VBox alignment="CENTER_RIGHT" prefHeight="440.0" prefWidth="284.0" spacing="20.0">
+         <children>
+            <Label text="Annonce postée par">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="nomLabel" text="Nom de l'annonceur" />
+            <Label text="Disponible sur">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="localLabel" text="Geolocalisation" />
+            <Label text="Voici la liste des disponibiltés :">
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </Label>
+            <ListView fx:id="dateListView" prefHeight="101.0" prefWidth="227.0" />
+         </children>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </children>
+</HBox>

@@ -1,0 +1,12 @@
+/* CSS spécifique au profil */
+
+#titreLabel {
+    -fx-font-weight: bold;
+    -fx-font-size: 36px;
+}
+
+.image-view {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0); /* Ombre pour l'image */
+}
+
+/*____________________________________________________________________________*/
